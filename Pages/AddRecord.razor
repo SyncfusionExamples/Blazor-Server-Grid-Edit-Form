@@ -1,0 +1,86 @@
+﻿@page "/addrecord/{Value:int}"
+
+@using GridEditFormSample.Data
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Calendars
+@inject NavigationManager NavigationManager
+@inject OrderService Ord
+
+<EditForm Model="@SelectedData" Context="formContext" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="modal-body">
+        @if (SelectedData.OrderID > 0)
+        {
+            <p>
+                <label for="OrderID">OrderID: </label>
+                <SfTextBox ID="OrderID" Value="@SelectedData.OrderID.ToString()" Enabled="false"></SfTextBox>
+            </p>
+        }
+        else
+        {
+            <p>
+                <label for="OrderID">OrderID: </label>
+                <SfTextBox @ref="@Text" ID="OrderID" Value="@SelectedData.OrderID.ToString()"></SfTextBox>
+            </p>
+        }
+        <p>
+            <label for="CustomerID">CustomerID: </label>
+            <SfDropDownList ID="CustomerID" Placeholder="e.g. Australia" @bind-Value="@SelectedData.CustomerID" DataSource="@Ord.GetOrderDetails().Select(X=>X.CustomerID).Distinct()">
+                <DropDownListFieldSettings Value="CustomerID"></DropDownListFieldSettings>
+            </SfDropDownList>
+        </p>
+        <p>
+            <label for="OrderDate">OrderDate: </label>
+            <SfDatePicker ID="OrderDate" @bind-Value="@SelectedData.OrderDate"></SfDatePicker>
+        </p>
+        <p>
+            <label for="Freight">Freight: </label>
+            <SfNumericTextBox ID="Freight" TValue="double?" @bind-Value="@SelectedData.Freight"></SfNumericTextBox>
+        </p>
+        @if (SelectedData.OrderID > 0)
+        {
+            <button class="btn btn-primary" type="submit">Save</button>
+        }
+        else
+        {
+            <button class="btn btn-primary" type="submit">Add</button>
+        }
+        <button class="btn btn-primary" type="button" @onclick="close">Cancel</button>
+    </div>
+</EditForm>
+
+@code{
+    [Parameter]
+    public int Value { get; set; }
+    public SfTextBox Text { get; set; }
+    public Order SelectedData { get; set; } = new Order();
+    protected override void OnInitialized()
+    {
+        if (Value > 0)
+        {
+            SelectedData = Ord.GetOrderDetails().Where(X => X.OrderID == Value).FirstOrDefault();
+        }
+    }
+    private void HandleValidSubmit()
+    {
+        if (Value != 0)
+        {
+            Order Check = Ord.GetOrderDetails().Where(X => X.OrderID == Value).FirstOrDefault();
+            Check.OrderID = SelectedData.OrderID;
+            Check.CustomerID = SelectedData.CustomerID;
+            Check.OrderDate = SelectedData.OrderDate;
+            Check.Freight = SelectedData.Freight;
+        }
+        else
+        {
+            Ord.GetOrderDetails().Add(new Order() { OrderID = int.Parse(this.Text.Value), CustomerID = SelectedData.CustomerID, Freight = SelectedData.Freight, OrderDate = SelectedData.OrderDate });
+        }
+        NavigationManager.NavigateTo("/");
+    }
+    public void close()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
