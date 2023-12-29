@@ -1,0 +1,38 @@
+﻿@page "/deleterecord/{Value:int}"
+
+@using GridEditFormSample.Data
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Inputs
+@inject NavigationManager NavigationManager
+@inject OrderService Ord
+@if (Value > 0)
+{
+    <h1>Are you sure you want to delete the @Value record?</h1>
+    <SfButton OnClick="Delete">Yes</SfButton><SfButton OnClick="Cancel">No</SfButton>
+}
+else
+{
+    <h1>Kindly select a record to delete</h1>
+
+    <SfButton OnClick="Cancel">Return</SfButton>
+}
+
+
+@code{
+    [Parameter]
+    public int Value { get; set; }
+    public SfTextBox Text { get; set; }
+    public Order SelectedData { get; set; } = new Order();
+    protected void Delete()
+    {
+        if (Value > 0)
+        {
+            Ord.GetOrderDetails().Remove(Ord.GetOrderDetails().Where(X => X.OrderID == Value).FirstOrDefault());
+        }
+        NavigationManager.NavigateTo("/");
+    }
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
