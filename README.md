@@ -16,8 +16,11 @@ This sample demonstrates how to perform CRUD operations in a Syncfusion Blazor D
 ## Prerequisites
 
 * Visual Studio 2022
+* Visual Studio Code
 
 ## How to Run the Project
+
+**Visual Studio 2022**
 
 1. Checkout this repository to a location on your local machine.
 2. Open `GridEditFormSample.sln` using Visual Studio 2022.
@@ -26,6 +29,17 @@ This sample demonstrates how to perform CRUD operations in a Syncfusion Blazor D
 5. Run the project.
 6. Navigate to the page that hosts the Syncfusion DataGrid sample.
 7. Use the available CRUD actions and edit a record through the dedicated EditForm page to review the navigation-based editing workflow.
+
+**Visual Studio Code**
+
+1. Open the repository folder in Visual Studio Code.
+2. Open the integrated terminal.
+3. Navigate to the project directory.
+
+```bash
+dotnet restore
+dotnet run
+```
 
 ## Project Structure
 
