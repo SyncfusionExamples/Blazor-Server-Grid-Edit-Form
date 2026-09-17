@@ -15,8 +15,7 @@ This sample demonstrates how to perform CRUD operations in a Syncfusion Blazor D
 
 ## Prerequisites
 
-* Visual Studio 2022
-* Visual Studio Code
+* Visual Studio 2022 or Visual Studio Code
 
 ## How to Run the Project
 
