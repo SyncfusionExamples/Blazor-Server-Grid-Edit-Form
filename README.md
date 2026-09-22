@@ -2,7 +2,7 @@
 
 ## Overview
 
-This sample demonstrates how to perform CRUD operations in a Syncfusion Blazor DataGrid by integrating Blazor `EditForm` components into the editing workflow. Instead of editing records directly inside the Grid, records are edited through a dedicated page that is reached through navigation, providing an experience similar to MVC scaffolding patterns. The sample shows how a Blazor Server application can combine DataGrid data presentation with form-based editing to separate record management from the main Grid view.
+This sample demonstrates how to perform CRUD operations in a Syncfusion [Blazor DataGrid](https://www.syncfusion.com/blazor-components/blazor-datagrid) by integrating Blazor `EditForm` components into the editing workflow. Instead of editing records directly inside the Grid, records are edited through a dedicated page that is reached through navigation, providing an experience similar to MVC scaffolding patterns. The sample shows how a Blazor Server application can combine DataGrid data presentation with form-based editing to separate record management from the main Grid view.
 
 ## Key Features
 
